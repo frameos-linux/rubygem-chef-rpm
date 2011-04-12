@@ -6,8 +6,8 @@
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 0.9.12
-Release: 1%{?dist}
+Version: 0.9.14
+Release: 2%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
@@ -32,6 +32,7 @@ Requires: rubygem(uuidtools) >= 0
 BuildRequires: rubygems
 BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
+Obsoletes: chef
 
 %description
 A systems integration framework, built to bring the benefits of configuration
@@ -70,5 +71,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Apr 01 2011 Sergio Rubio <rubiojr@frameos.org> - 0.9.14-2
+- Obsoletes chef package
+
+* Sat Mar 05 2011 Sergio Rubio <rubiojr@frameos.org> - 0.9.14-1
+- updated to chef 0.9.14 
+
 * Sun Dec 19 2010 Sergio Rubio <rubiojr@frameos.org> - 0.9.12-1
 - Initial package
