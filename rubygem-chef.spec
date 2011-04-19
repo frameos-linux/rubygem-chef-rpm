@@ -6,12 +6,12 @@
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 0.9.14
-Release: 2%{?dist}
+Version: 0.9.16
+Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
-Source0: http://gemcutter.orggems/%{gemname}-%{version}.gem
+Source0: http://rubygems.org/gems/%{gemname}-%{version}.gem
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: rubygems
 Requires: rubygem(mixlib-config) >= 1.1.2
@@ -71,6 +71,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Apr 19 2011 Sergio Rubio <rubiojr@frameos.org> - 0.9.16-1
+- bumped version
+
 * Fri Apr 01 2011 Sergio Rubio <rubiojr@frameos.org> - 0.9.14-2
 - Obsoletes chef package
 
