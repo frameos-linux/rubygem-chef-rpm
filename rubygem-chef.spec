@@ -6,12 +6,17 @@
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 0.10.0.rc.0
+Version: 0.10.2
 Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
 Source0: http://rubygems.org/downloads/%{gemname}-%{version}.gem
+Source1: chef-client.init
+Source2: chef-client.sysconfig
+Source3: chef-client.logrotate
+Source4: yum.rb
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: rubygems
 Requires: rubygem(mixlib-config) >= 1.1.2
@@ -31,6 +36,7 @@ Requires: rubygem(erubis) >= 0
 Requires: rubygem(moneta) >= 0
 Requires: rubygem(highline) >= 0
 Requires: rubygem(uuidtools) >= 0
+Requires: ruby >= 1.8.7
 BuildRequires: rubygems
 BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
@@ -48,6 +54,16 @@ management to your entire infrastructure.
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}%{gemdir}
+mkdir -p %{buildroot}/etc/rc.d/init.d
+mkdir -p %{buildroot}/var/log/chef
+mkdir -p %{buildroot}%{_sysconfdir}/chef
+mkdir -p %{buildroot}%{_sysconfdir}/sysconfig/
+mkdir -p %{buildroot}/var/run/chef
+mkdir -p %{buildroot}/var/log/chef
+mkdir -p %{buildroot}%{_sysconfdir}/logrotate.d
+#chef needs /var/chef/cache in 0.10
+mkdir -p %{buildroot}/var/chef/cache
+
 gem install --local --install-dir %{buildroot}%{gemdir} \
             --force --rdoc %{SOURCE0}
 mkdir -p %{buildroot}/%{_bindir}
@@ -55,8 +71,25 @@ mv %{buildroot}%{gemdir}/bin/* %{buildroot}/%{_bindir}
 rmdir %{buildroot}%{gemdir}/bin
 find %{buildroot}%{geminstdir}/bin -type f | xargs chmod a+x
 
+cp %{SOURCE1} %{buildroot}/etc/rc.d/init.d/chef-client
+chmod +x %{buildroot}/etc/rc.d/init.d/chef-client
+cp %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/chef-client
+cp %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/chef-client
+cp %{SOURCE4} %{buildroot}/usr/lib/ruby/gems/1.8/gems/chef-%{version}/lib/chef/provider/package/yum.rb
+
+
 %clean
 rm -rf %{buildroot}
+
+%post
+# This adds the proper /etc/rc*.d links for the script
+/sbin/chkconfig --add chef-client
+
+%preun
+if [ $1 -eq 0 ] ; then
+    /sbin/service chef-client stop >/dev/null 2>&1
+    /sbin/chkconfig --del chef-client
+fi
 
 %files
 %defattr(-, root, root, -)
@@ -70,9 +103,45 @@ rm -rf %{buildroot}
 %doc %{geminstdir}/LICENSE
 %{gemdir}/cache/%{gemname}-%{version}.gem
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
+%config(noreplace) %{_sysconfdir}/sysconfig/chef-client
+%config(noreplace) %{_sysconfdir}/logrotate.d/chef-client
+%{_sysconfdir}/rc.d/init.d/chef-client
+/var/log/chef/
+/var/chef/cache/
+%config(noreplace) %{_sysconfdir}/chef
 
 
 %changelog
+* Mon Jul 04 2011 Sergio Rubio <srubio@abiquo.com> - 0.10.2-1
+- upstream update
+
+* Fri Jun 10 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.0-5
+- patch yum provider
+
+* Fri May 06 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.0-4
+- create /var/log/chef dir
+
+* Thu May 05 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.0-3
+- require ruby >= 1.8.7
+
+* Thu May 05 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.0-2
+- added init script
+- added logrotate script
+- added sysconfig file
+
+* Tue May 03 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.0-1
+- upstream update
+
+* Mon May 02 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.0.rc.2-1
+- upstream update
+
+* Thu Apr 28 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.0.rc.1-1
+- upstream update
+
+* Wed Apr 20 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.0.rc.0-2
+- bumped release
+- create /var/chef/cache
+
 * Wed Apr 20 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.0.rc.0-1
 - bumped version
 
