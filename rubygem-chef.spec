@@ -74,8 +74,6 @@ cp %{SOURCE1} %{buildroot}/etc/rc.d/init.d/chef-client
 chmod +x %{buildroot}/etc/rc.d/init.d/chef-client
 cp %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/chef-client
 cp %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/chef-client
-cp %{SOURCE4} %{buildroot}/usr/lib/ruby/gems/1.8/gems/chef-%{version}/lib/chef/provider/package/yum.rb
-
 
 %clean
 rm -rf %{buildroot}
