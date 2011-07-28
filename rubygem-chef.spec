@@ -6,8 +6,8 @@
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 0.10.4.rc.1
-Release: 2%{?buildstamp}%{?dist}
+Version: 0.10.4.rc.2
+Release: 1%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
@@ -15,6 +15,7 @@ Source0: http://rubygems.org/downloads/%{gemname}-%{version}.gem
 Source1: chef-client.init
 Source2: chef-client.sysconfig
 Source3: chef-client.logrotate
+Source4: yum.rb
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: rubygems
@@ -74,6 +75,8 @@ cp %{SOURCE1} %{buildroot}/etc/rc.d/init.d/chef-client
 chmod +x %{buildroot}/etc/rc.d/init.d/chef-client
 cp %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/chef-client
 cp %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/chef-client
+cp %{SOURCE4} %{buildroot}/usr/lib/ruby/gems/1.8/gems/chef-%{version}/lib/chef/provider/package/yum.rb
+
 
 %clean
 rm -rf %{buildroot}
@@ -109,9 +112,6 @@ fi
 
 
 %changelog
-* Thu Jul 28 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.4.rc.1-2
-- remove patched yum.rb
-
 * Wed Jul 27 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.4-1
 - preparing for 0.10.4 RC
 
