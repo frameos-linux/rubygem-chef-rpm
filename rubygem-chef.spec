@@ -15,7 +15,6 @@ Source0: http://rubygems.org/downloads/%{gemname}-%{version}.gem
 Source1: chef-client.init
 Source2: chef-client.sysconfig
 Source3: chef-client.logrotate
-Source4: yum.rb
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: rubygems
