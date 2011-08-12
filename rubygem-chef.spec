@@ -6,7 +6,7 @@
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 0.10.4.rc.4
+Version: 0.10.4
 Release: 1%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
