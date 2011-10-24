@@ -7,7 +7,7 @@
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
 Version: 0.10.4
-Release: 1%{?buildstamp}%{?dist}
+Release: 2%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
@@ -30,7 +30,7 @@ Requires: rubygem(json) >= 1.4.4
 Requires: rubygem(json) <= 1.4.6
 Requires: rubygem(treetop) >= 1.4.9
 Requires: rubygem(net-ssh) >= 2.1.3
-Requires: rubygem(net-ssh-multi) >= 1.0.1
+Requires: rubygem(net-ssh-multi) >= 1.1
 Requires: rubygem(erubis) >= 0
 Requires: rubygem(moneta) >= 0
 Requires: rubygem(highline) >= 0
@@ -109,6 +109,9 @@ fi
 
 
 %changelog
+* Mon Oct 24 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.4-2
+- bump net-ssh-multi dep version
+
 * Wed Jul 27 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.4-1
 - preparing for 0.10.4 RC
 
