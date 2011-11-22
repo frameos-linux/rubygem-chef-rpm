@@ -2,16 +2,17 @@
 %define ruby_sitelib %(ruby -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
 %define gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %define gemname chef
-%define geminstdir %{gemdir}/gems/%{gemname}-%{version}
+%define prerelease .rc.2
+%define geminstdir %{gemdir}/gems/%{gemname}-%{version}%{?prerelease}
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 0.10.4
-Release: 2%{?buildstamp}%{?dist}
+Version: 0.10.6
+Release: 0rc2%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
-Source0: http://rubygems.org/downloads/%{gemname}-%{version}.gem
+Source0: http://rubygems.org/downloads/%{gemname}-%{version}%{?prerelease}.gem
 Source1: chef-client.init
 Source2: chef-client.sysconfig
 Source3: chef-client.logrotate
@@ -27,7 +28,7 @@ Requires: rubygem(rest-client) >= 1.0.4
 Requires: rubygem(rest-client) < 1.7.0
 Requires: rubygem(bunny) >= 0.6.0
 Requires: rubygem(json) >= 1.4.4
-Requires: rubygem(json) <= 1.4.6
+Requires: rubygem(json) <= 1.6.1
 Requires: rubygem(treetop) >= 1.4.9
 Requires: rubygem(net-ssh) >= 2.1.3
 Requires: rubygem(net-ssh-multi) >= 1.1
@@ -38,7 +39,7 @@ Requires: rubygem(uuidtools) >= 0
 Requires: ruby >= 1.8.7
 BuildRequires: rubygems
 BuildArch: noarch
-Provides: rubygem(%{gemname}) = %{version}
+Provides: rubygem(%{gemname}) = %{version}%{?prerelease}
 Obsoletes: chef
 
 %description
@@ -94,12 +95,12 @@ fi
 %{_bindir}/chef-solo
 %{_bindir}/knife
 %{_bindir}/shef
-%{gemdir}/gems/%{gemname}-%{version}/
-%doc %{gemdir}/doc/%{gemname}-%{version}
+%{gemdir}/gems/%{gemname}-%{version}%{?prerelease}/
+%doc %{gemdir}/doc/%{gemname}-%{version}%{?prerelease}
 %doc %{geminstdir}/README.rdoc
 %doc %{geminstdir}/LICENSE
-%{gemdir}/cache/%{gemname}-%{version}.gem
-%{gemdir}/specifications/%{gemname}-%{version}.gemspec
+%{gemdir}/cache/%{gemname}-%{version}%{?prerelease}.gem
+%{gemdir}/specifications/%{gemname}-%{version}%{?prerelease}.gemspec
 %config(noreplace) %{_sysconfdir}/sysconfig/chef-client
 %config(noreplace) %{_sysconfdir}/logrotate.d/chef-client
 %{_sysconfdir}/rc.d/init.d/chef-client
