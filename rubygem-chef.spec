@@ -7,7 +7,7 @@
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 0.10.6
+Version: 10.12.0
 Release: 1%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
@@ -23,19 +23,25 @@ Requires: rubygem(mixlib-config) >= 1.1.2
 Requires: rubygem(mixlib-cli) >= 1.1.0
 Requires: rubygem(mixlib-log) >= 1.3.0
 Requires: rubygem(mixlib-authentication) >= 1.1.0
-Requires: rubygem(ohai) >= 0.6
+Requires: rubygem(mixlib-shellout) >= 0
+Requires: rubygem(ohai) >= 0.6.0
 Requires: rubygem(rest-client) >= 1.0.4
 Requires: rubygem(rest-client) < 1.7.0
 Requires: rubygem(bunny) >= 0.6.0
 Requires: rubygem(json) >= 1.4.4
 Requires: rubygem(json) <= 1.6.1
 Requires: rubygem(treetop) >= 1.4.9
-Requires: rubygem(net-ssh) >= 2.1.3
-Requires: rubygem(net-ssh-multi) >= 1.1
+Requires: rubygem(treetop) < 1.5.0
+Requires: rubygem(net-ssh) >= 2.2.2
+Requires: rubygem(net-ssh) < 2.3.0
+Requires: rubygem(net-ssh-multi) >= 1.1.0
+Requires: rubygem(net-ssh-multi) < 1.2.0
 Requires: rubygem(erubis) >= 0
 Requires: rubygem(moneta) >= 0
-Requires: rubygem(highline) >= 0
+Requires: rubygem(highline) >= 1.6.9
 Requires: rubygem(uuidtools) >= 0
+Requires: rubygem(yajl-ruby) >= 1.1
+Requires: rubygem(yajl-ruby) < 2.0
 Requires: ruby >= 1.8.7
 BuildRequires: rubygems
 BuildArch: noarch
@@ -110,6 +116,9 @@ fi
 
 
 %changelog
+* Wed Aug 31 2012 Sean P. Kane <spkane00@gmail.com> - 10.12.0-1
+- bumped version 10.12.0
+
 * Wed Dec 14 2011 Sergio Rubio <rubiojr@frameos.org> - 0.10.6-1
 - bumped version 0.10.6
 
