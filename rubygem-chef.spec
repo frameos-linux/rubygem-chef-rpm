@@ -7,7 +7,7 @@
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 10.12.0
+Version: 10.14.2
 Release: 1%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
@@ -22,12 +22,13 @@ Requires: rubygems
 Requires: rubygem(mixlib-config) >= 1.1.2
 Requires: rubygem(mixlib-cli) >= 1.1.0
 Requires: rubygem(mixlib-log) >= 1.3.0
-Requires: rubygem(mixlib-authentication) >= 1.1.0
+Requires: rubygem(mixlib-authentication) >= 1.3.0
 Requires: rubygem(mixlib-shellout) >= 0
 Requires: rubygem(ohai) >= 0.6.0
 Requires: rubygem(rest-client) >= 1.0.4
 Requires: rubygem(rest-client) < 1.7.0
 Requires: rubygem(bunny) >= 0.6.0
+Requires: rubygem(bunny) < 0.8.0
 Requires: rubygem(json) >= 1.4.4
 Requires: rubygem(json) <= 1.6.1
 Requires: rubygem(treetop) >= 1.4.9
@@ -116,6 +117,9 @@ fi
 
 
 %changelog
+* Tue Sep 11 2012 Sean P. Kane <spkane00@gmail.com> - 10.14.2-1
+- bumped version 10.14.2
+
 * Wed Aug 31 2012 Sean P. Kane <spkane00@gmail.com> - 10.12.0-1
 - bumped version 10.12.0
 
