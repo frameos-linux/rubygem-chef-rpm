@@ -7,8 +7,8 @@
 
 Summary: A systems integration framework, built to bring the benefits of configuration management to your entire infrastructure
 Name: rubygem-%{gemname}
-Version: 10.14.2
-Release: 1%{?buildstamp}%{?dist}
+Version: 10.16.4
+Release: 2%{?buildstamp}%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://wiki.opscode.com/display/chef
@@ -35,8 +35,8 @@ Requires: rubygem(treetop) >= 1.4.9
 Requires: rubygem(treetop) < 1.5.0
 Requires: rubygem(net-ssh) >= 2.2.2
 Requires: rubygem(net-ssh) < 2.3.0
-Requires: rubygem(net-ssh-multi) >= 1.1.0
-Requires: rubygem(net-ssh-multi) < 1.2.0
+Requires: rubygem(net-ssh-multi) >= 1.1
+Requires: rubygem(net-ssh-multi) < 1.2
 Requires: rubygem(erubis) >= 0
 Requires: rubygem(moneta) >= 0
 Requires: rubygem(highline) >= 1.6.9
@@ -117,6 +117,9 @@ fi
 
 
 %changelog
+* Fri Dec 21 2012 Sean P. Kane <spkane00@gmail.com> - 10.16.2-1
+- bumped version 10.16.2
+
 * Tue Sep 11 2012 Sean P. Kane <spkane00@gmail.com> - 10.14.2-1
 - bumped version 10.14.2
 
